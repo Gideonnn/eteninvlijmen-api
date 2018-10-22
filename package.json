@@ -1,19 +1,18 @@
 {
   "name": "eteninvlijmen-api",
   "version": "0.0.1",
-  "description": "An API to serve eteninvlijmen-bot, a bot to help me and my friends plan dinner.",
+  "description": "An API to serve eteninvlijmen-bot, a bot to help me and my friends plan dinner",
   "main": "app.js",
   "scripts": {
+    "start": "node index.js",
+    "start:dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/Gideonnn/eteninvlijmen-api.git"
   },
   "author": "Gideon Spierings",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Gideonnn/eteninvlijmen-api/issues"
+  "dependencies": {
   },
-  "homepage": "https://github.com/Gideonnn/eteninvlijmen-api#readme"
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
 }
