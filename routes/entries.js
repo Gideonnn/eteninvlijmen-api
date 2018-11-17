@@ -3,14 +3,38 @@ const router = express.Router();
 
 const Entry = require('../models/entry.model');
 
+const _getDayPreferences = async (year, week, userId) => {
+  const result = await Entry.findOne({ year, week, userId });
+  return result ? result.preferences : [false, false, false, false, false, false, false];
+};
+
+const _getSummary = async (year, week) => {
+  const result = await Entry.find({ year, week });
+  return result
+    .map(res => res.preferences)
+    .reduce(
+      (acc, cur) => {
+        acc[0] += cur[0];
+        acc[1] += cur[1];
+        acc[2] += cur[2];
+        acc[3] += cur[3];
+        acc[4] += cur[4];
+        acc[5] += cur[5];
+        acc[6] += cur[6];
+        return acc;
+      },
+      [0, 0, 0, 0, 0, 0, 0]
+    )
+    .map(sum => (sum > 0 ? Math.floor((sum / result.length) * 100) : 0));
+};
+
 router.get('/', async (req, res) => {
   const { year, week, userId } = req.query;
-  const result = await Entry.findOne({ year, week, userId });
 
-  if (result) {
-    res.json(result.preferences);
+  if (userId) {
+    res.json(await _getDayPreferences(year, week, userId));
   } else {
-    res.json([false, false, false, false, false, false, false]);
+    res.json(await _getSummary(year, week));
   }
 });
 
