@@ -12,6 +12,7 @@ router.post('/', async (req, res) => {
   try {
     const result = await User.create({
       name: req.body.name,
+      avatar: req.body.avatar,
     });
 
     res.json(result);
