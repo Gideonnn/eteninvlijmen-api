@@ -7,6 +7,6 @@ const EntrySchema = new mongoose.Schema({
   preferences: [],
 });
 
-EntrySchema.index({ name: 1, year: 1, week: 1 }, { unique: true });
+EntrySchema.index({ userId: 1, year: 1, week: 1 }, { unique: true });
 
 module.exports = mongoose.model('Entry', EntrySchema);
